@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 
 const InfoIcon = () => {
   return (
-    <View>
+    <View style={styles.container}>
         <TouchableOpacity style={styles.button}>
             <Text style={styles.buttonText}>Click me</Text>
         </TouchableOpacity>
@@ -12,6 +12,10 @@ const InfoIcon = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    display:"flex",
+    backgroundColor: 'lightgray', // Added background color for debugging
+  },
   button: {
     position: 'absolute',
     bottom: 10,
