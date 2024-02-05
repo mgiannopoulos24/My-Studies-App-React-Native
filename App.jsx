@@ -8,7 +8,7 @@ import InfoIcon from './InfoIcon/InfoIcon';
 
 export default function App (){
   return (
-    <View style={styles.container}>
+    <View style={{ position : 'absolute', top : 0, left : 0, right : 0,bottom : 0,}}>
         <Login/>
     </View>
   );
@@ -16,9 +16,8 @@ export default function App (){
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex:100,
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white', // Added background color for debugging
+    alignItems: 'center'
   },
 });
