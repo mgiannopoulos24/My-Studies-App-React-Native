@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     width: 300,
     height: 200,
     resizeMode: 'cover',
-    marginBottom: 100,
+    marginBottom: 70,
   },
   paragraph: {
     fontSize: 16,
