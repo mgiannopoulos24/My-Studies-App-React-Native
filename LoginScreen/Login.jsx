@@ -11,14 +11,14 @@ const Login = () => {
       <View style={styles.container}>
         <Text style={styles.title}>Γραμματείες Πανεπιστημίου Αθηνών</Text>
         <Image source={logo_img} style={styles.image} />
-        <Text style={styles.paragraph}>Connect</Text>
+        <Text style={styles.paragraph}>Σύνδεση με:</Text>
         <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Connect Button</Text>
+          <Text style={styles.buttonText}>Ιδρυματικό Λογαριασμό</Text>
         </TouchableOpacity>
         <View style={styles.hr} />
-        <Text style={styles.paragraph}>Don't Connect</Text>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Don't Connect Button</Text>
+        <Text style={styles.paragraph}>Αν δεν έχετε ιδρυματικό λογαριασμό:</Text>
+        <TouchableOpacity style={{...styles.button, ...styles.outlinedButton}}>
+          <Text style={{ ...styles.buttonText, ...styles.outlinedButtonText }}>Δημιουργία Λογαριασμού</Text>
         </TouchableOpacity>
       </View>
     </ImageBackground>
@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
   paragraph: {
     fontSize: 16,
     marginBottom: 10,
+    fontWeight:'bold'
   },
   button: {
     backgroundColor: 'blue',
@@ -66,6 +67,14 @@ const styles = StyleSheet.create({
     borderBottomColor: 'black',
     borderBottomWidth: 1,
     marginBottom: 10,
+  },
+  outlinedButton: {
+    backgroundColor: 'lightblue',
+    borderWidth: 1,
+    borderColor: 'blue',
+  },
+  outlinedButtonText: {
+    color: 'black',
   },
 });
 
