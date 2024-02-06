@@ -1,25 +1,49 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { View, StyleSheet, TouchableOpacity, Text, Image, Dimensions, ImageBackground } from 'react-native';
 import logo_img from "./assets/ekpa-logo.png";
-
-
+import LoginForm from './LoginForm/LoginForm';
+import SignupForm from './SignupForm/SignupForm';
 
 const Login = () => {
   const { width,height} = Dimensions.get('window');
+
+  const [showLoginForm, setShowLoginForm] = useState(false);
+
+  const handleInstitutionalLogin = () => {
+    setShowLoginForm(prevState => !prevState);
+  };
+
+  const [showSignupForm,setShowSignupForm]= useState(false);
+  
+  const handleAccountCreation=()=>{
+    setShowSignupForm(prevState => !prevState);
+  } 
+
+
   return (
     <ImageBackground source={require('./assets/DIT3.jpg')}  style={{...styles.backgroundImage, width,height}}>
       <View style={styles.container}>
         <Text style={styles.title}>Γραμματείες Πανεπιστημίου Αθηνών</Text>
         <Image source={logo_img} style={styles.image} />
         <Text style={styles.paragraph}>Σύνδεση με:</Text>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={handleInstitutionalLogin}>
           <Text style={styles.buttonText}>Ιδρυματικό Λογαριασμό</Text>
         </TouchableOpacity>
+        {showLoginForm && (
+          <View style={styles.loginFormContainer}>
+            <LoginForm />
+          </View>
+        )}
         <View style={styles.hr} />
         <Text style={styles.paragraph}>Αν δεν έχετε ιδρυματικό λογαριασμό:</Text>
-        <TouchableOpacity style={{...styles.button, ...styles.outlinedButton}}>
+        <TouchableOpacity style={{...styles.button, ...styles.outlinedButton}}  onPress={handleAccountCreation}>
           <Text style={{ ...styles.buttonText, ...styles.outlinedButtonText }}>Δημιουργία Λογαριασμού</Text>
         </TouchableOpacity>
+        {showSignupForm && (
+          <View style={styles.signupFormContainer}>
+            <SignupForm />
+          </View>
+        )}
       </View>
     </ImageBackground>
   );
@@ -75,6 +99,14 @@ const styles = StyleSheet.create({
   },
   outlinedButtonText: {
     color: 'black',
+  },
+  loginFormContainer: {
+    width: '5%',
+    alignItems: 'center',
+  },
+  signupFormContainer: {
+    width: '5%',
+    alignItems: 'center',
   },
 });
 
