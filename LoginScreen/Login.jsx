@@ -1,12 +1,13 @@
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity, Text, Image, ScrollView, ImageBackground } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Text, Image, Dimensions, ImageBackground } from 'react-native';
 import logo_img from "./assets/ekpa-logo.png";
-import backgroundImg from "./assets/DIT3.jpg";
+
 
 const Login = () => {
+  const { width,height} = Dimensions.get('window');
   return (
-    <ImageBackground source={backgroundImg} style={styles.backgroundImage}>
-      <ScrollView contentContainerStyle={styles.container}>
+    <ImageBackground source={require('./assets/DIT3.jpg')}  style={{...styles.backgroundImage, width,height}}>
+      <View style={styles.container}>
         <Text style={styles.title}>Γραμματείες Πανεπιστημίου Αθηνών</Text>
         <Image source={logo_img} style={styles.image} />
         <Text style={styles.paragraph}>Connect</Text>
@@ -18,21 +19,21 @@ const Login = () => {
         <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>Don't Connect Button</Text>
         </TouchableOpacity>
-      </ScrollView>
+      </View>
     </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover', 
+    
+  },
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: 'transparent',
     marginTop:40,
-  },
-  backgroundImage: {
-    flex: 1,
-    resizeMode: 'stretch',
   },
   title: {
     fontSize: 18,
