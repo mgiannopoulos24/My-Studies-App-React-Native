@@ -13,7 +13,7 @@ const InfoIcon = () => {
 
 const styles = StyleSheet.create({
   container: {
-    display:"flex",
+    flex:1,
     backgroundColor: 'lightgray', // Added background color for debugging
   },
   button: {
