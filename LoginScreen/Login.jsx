@@ -101,11 +101,11 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   loginFormContainer: {
-    width: '5%',
+    width: "90%",
     alignItems: 'center',
   },
   signupFormContainer: {
-    width: '5%',
+    width: 100,
     alignItems: 'center',
   },
 });
