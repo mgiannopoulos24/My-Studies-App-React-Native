@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
-import { View, StyleSheet, TouchableOpacity, Text, Image, Dimensions, ImageBackground } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Text, Image, Dimensions, ImageBackground} from 'react-native';
 import logo_img from "./assets/ekpa-logo.png";
 import LoginForm from './LoginForm/LoginForm';
 import SignupForm from './SignupForm/SignupForm';
+import InfoIcon from '../InfoIcon/InfoIcon';
+
 
 const Login = () => {
   const { width,height} = Dimensions.get('window');
@@ -18,6 +20,7 @@ const Login = () => {
   const handleAccountCreation=()=>{
     setShowSignupForm(prevState => !prevState);
   } 
+
 
 
   return (
@@ -36,7 +39,7 @@ const Login = () => {
         )}
         <View style={styles.hr} />
         <Text style={styles.paragraph}>Αν δεν έχετε ιδρυματικό λογαριασμό:</Text>
-        <TouchableOpacity style={{...styles.button, ...styles.outlinedButton}}  onPress={handleAccountCreation}>
+        <TouchableOpacity style={{ ...styles.button, ...styles.outlinedButton }} onPress={handleAccountCreation}>
           <Text style={{ ...styles.buttonText, ...styles.outlinedButtonText }}>Δημιουργία Λογαριασμού</Text>
         </TouchableOpacity>
         {showSignupForm && (
@@ -44,6 +47,9 @@ const Login = () => {
             <SignupForm />
           </View>
         )}
+      </View>
+      <View>
+      <InfoIcon />
       </View>
     </ImageBackground>
   );
@@ -101,13 +107,14 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   loginFormContainer: {
-    width: "90%",
+    width: '80%',
     alignItems: 'center',
   },
   signupFormContainer: {
-    width: 100,
+    width: '80%',
     alignItems: 'center',
   },
+  
 });
 
 export default Login;
