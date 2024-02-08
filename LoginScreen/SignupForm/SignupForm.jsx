@@ -9,7 +9,7 @@ const SignupForm=()=>{
     };
 
     return(
-        <View>
+        <View style={styles.container}>
             <TextInput
                 style={styles.input}
                 onChangeText={onChangeText}
@@ -28,13 +28,16 @@ const SignupForm=()=>{
 }
 
 const styles=StyleSheet.create({
+    container: {
+        width: '100%',
+    },
     input: {
         height: 40,
         margin: 12,
         borderWidth: 1,
         padding: 10,
         backgroundColor:"white",
-        borderRadius:10
+        borderRadius:10,
       },
 })
 export default SignupForm;
