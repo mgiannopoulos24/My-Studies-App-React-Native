@@ -25,10 +25,13 @@ const InfoIcon = () => {
           <Icon name="question-circle-o" size={30} color="white" />
         </TouchableOpacity>
         <Portal>
-          <Dialog visible={visible} style={styles.dialog}>
+          <Dialog visible={visible} style={styles.dialog} animationType="fade" >
+            <View style={styles.iconContainer}>
+              <IconButton icon="close" mode="text" onPress={closeDialog}/>
+            </View>
             <View style={styles.titleContainer}>
-              <Text style={styles.dialogTitleLeft}>Καλωσήρθατε</Text>
-              <IconButton icon="close" mode="text" onPress={closeDialog} style={styles.closeButton} />
+              <Text style={styles.title}>Καλωσήρθατε</Text>
+              
             </View>
             <Dialog.Content  style={styles.dialogContent}>
             <ScrollView style={styles.scrollContainer}>
@@ -104,26 +107,25 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  title:{
+    fontWeight: 'bold',
+    fontSize:18
+  },
   dialog: {
     backgroundColor: 'white',
     width: '80%',
     alignSelf: 'center',
     transform: [{ translateY: '-70%' }],
+    borderRadius: 5,
   },
   dialogContent: {
     height: 300,
   },
   titleContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
     marginBottom: 10,
-  },
-  dialogTitleLeft: {
-    color: 'black',
-    fontWeight: 'bold',
-    fontSize: 18,
-    marginLeft:'7%'
   },
   bold: {
     fontWeight: 'bold',
@@ -133,6 +135,12 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     flexGrow: 1, 
+  },
+  iconContainer: {
+    marginTop:0,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    
   },
 });
 
