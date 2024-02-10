@@ -1,35 +1,42 @@
-import React, { useRef } from 'react';
-import { Button, Text, StyleSheet, View } from 'react-native';
-import { DrawerLayoutAndroid } from 'react-native';
+import React, { useState } from 'react';
+import { Button, Text, StyleSheet, View, Platform, TouchableOpacity } from 'react-native';
+import Drawer from 'react-native-drawer';
 
 const DrawerStud = () => {
-    const drawer = useRef(null);
+    const [isOpen, setIsOpen] = useState(false);
 
-    const navigationView = () => (
-        <View style={[styles.container, styles.navigationContainer]}>
-            <Text style={styles.paragraph}>I'm in the Drawer!</Text>
-            <Button
-                title="Close drawer"
-                onPress={() => drawer.current.closeDrawer()}
-            />
-        </View>
-    );
+    const openDrawer = () => {
+        setIsOpen(true);
+    };
+
+    const closeDrawer = () => {
+        setIsOpen(false);
+    };
 
     return (
-        <DrawerLayoutAndroid
-            ref={drawer}
-            drawerWidth={300}
-            drawerPosition="left" // Specify the drawer position directly
-            renderNavigationView={navigationView}>
-            {/* Main content */}
+        <Drawer
+            open={isOpen}
+            onClose={closeDrawer}
+            side="left"
+            tapToClose={true}
+            openDrawerOffset={0.2}
+            panCloseMask={0.2}
+            type='overlay'
+            content={
+                <View style={styles.drawer}>
+                    <TouchableOpacity onPress={closeDrawer} style={styles.closeButton}>
+                        <Text style={styles.buttonText}>Close Drawer</Text>
+                    </TouchableOpacity>
+                    <Text>This is the Drawer content</Text>
+                </View>
+            }
+        >
             <View style={styles.container}>
-                <Text>Main content</Text>
-                <Button
-                    title="Open drawer"
-                    onPress={() => drawer.current.openDrawer()}
-                />
+                <TouchableOpacity onPress={openDrawer} style={styles.openButton}>
+                    <Text style={styles.buttonText}>Open Drawer</Text>
+                </TouchableOpacity>
             </View>
-        </DrawerLayoutAndroid>
+        </Drawer>
     );
 };
 
@@ -39,15 +46,25 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    navigationContainer: {
+    openButton: {
+        backgroundColor: 'blue',
+        padding: 10,
+        borderRadius: 5,
+    },
+    buttonText: {
+        color: 'white',
+        fontSize: 16,
+    },
+    drawer: {
         flex: 1,
         backgroundColor: '#fff',
         padding: 20,
     },
-    paragraph: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        textAlign: 'center',
+    closeButton: {
+        backgroundColor: 'blue',
+        padding: 10,
+        borderRadius: 5,
+        margin: 10,
     },
 });
 
