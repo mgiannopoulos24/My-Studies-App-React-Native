@@ -89,6 +89,7 @@ const DrawerStud = () => {
             <TouchableOpacity style={styles.dropdownOption} onPress={() => handleNavigation('Option3')}>
               <Text style={styles.optionText}>Συγγράματα</Text>
             </TouchableOpacity>
+            <br></br>
           </>
         )}
         <TouchableOpacity style={styles.drawerButton} onPress={() => setShowDropdown2(!showDropdown2)}>
