@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { View, StyleSheet, TextInput, Button } from 'react-native';
-import { signIn,checkUserRole } from "../AuthService"; // Import the signIn function from your authentication module
-
 
 
 const LoginForm = () => {
@@ -9,17 +7,7 @@ const LoginForm = () => {
     const [password, setPassword] = useState('');
     
 
-    const handleSignIn = async () => {
-        try {
-            await signIn(email, password); // Authenticate user
-            // After successful authentication, check user role
-            // and navigate to the appropriate screen
-            checkUserRole();
-            
-        } catch (error) {
-            console.error('Authentication failed:', error);
-        }
-    };
+
 
     const onChangeText = (text, field) => {
         if (field === 'email') {
@@ -44,7 +32,7 @@ const LoginForm = () => {
                 placeholder="Κωδικός"
                 secureTextEntry={true}
             />
-            <Button title="Σύνδεση" onPress={handleSignIn} />
+            <Button title="Σύνδεση"/>
         </View>
     );
 }
