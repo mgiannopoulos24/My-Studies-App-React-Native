@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, StyleSheet, TextInput, Button } from 'react-native';
 
 
-const LoginForm = () => {
+const LoginForm = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     
@@ -32,7 +32,7 @@ const LoginForm = () => {
                 placeholder="Κωδικός"
                 secureTextEntry={true}
             />
-            <Button title="Σύνδεση"/>
+            <Button title="Σύνδεση" onClick={() => navigation.navigate('MainStud')}/>
         </View>
     );
 }
