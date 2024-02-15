@@ -6,9 +6,9 @@ This project was created with ```npx create-expo-app```
 
 # <FirebaseProvider/>
 
-This component was taken from the following repository.[FirebaseProvider](https://github.com/gregfenton/react-and-user-profiles-with-firebase-auth-and-firestore/blob/main/src/providers/FirebaseProvider.jsx)
+This component was taken from the following repository.[ FirebaseProvider](https://github.com/gregfenton/react-and-user-profiles-with-firebase-auth-and-firestore/blob/main/src/providers/FirebaseProvider.jsx)
 
 # <AuthProvider/>
 
-This component was taken from the following repository. [AuthProvider](https://github.com/gregfenton/react-and-user-profiles-with-firebase-auth-and-firestore/blob/main/src/providers/AuthProvider.jsx)
+This component was taken from the following repository. [ AuthProvider](https://github.com/gregfenton/react-and-user-profiles-with-firebase-auth-and-firestore/blob/main/src/providers/AuthProvider.jsx)
 
