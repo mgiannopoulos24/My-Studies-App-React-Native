@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, View} from 'react-native';
 import Login from "./src/LoginScreen/Login";
 import MainStud from './src/MainPage/MainStud';
+import MainProf from './src/MainPage/MainProf';
 import { createStackNavigator } from '@react-navigation/stack';
 import { DrawerProvider } from './src/Drawers/DrawerContext';
 import { NavigationContainer } from '@react-navigation/native';
@@ -13,16 +14,17 @@ export default function App (){
   return (
     <FirebaseProvider>
       <AuthProvider>
-        <NavigationContainer>
-          <DrawerProvider>
+        <DrawerProvider>
+          <NavigationContainer>
             <View style={{ position : 'absolute', top : 0, left : 0, right : 0,bottom : 0,}}>
-                <Stack.Navigator initialRouteName="Login">
-                  <Stack.Screen name="Login" component={Login} />
-                  <Stack.Screen name="MainStud" component={MainStud}/>
+                <Stack.Navigator>
+                  <Stack.Screen name="Login" component={Login} options={{ headerShown: false }}/>
+                  <Stack.Screen name='MainStud' component={MainStud} options={{ headerShown: false }}/>
+                  <Stack.Screen name='MainProf' component={MainProf} options={{ headerShown: false }}/>
                 </Stack.Navigator>
             </View>
-          </DrawerProvider>
-        </NavigationContainer>
+          </NavigationContainer>
+        </DrawerProvider>        
       </AuthProvider>
     </FirebaseProvider>
   );
