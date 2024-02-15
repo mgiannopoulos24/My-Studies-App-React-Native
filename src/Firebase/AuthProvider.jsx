@@ -1,18 +1,11 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-
-import {
-  createUserWithEmailAndPassword,
-  onAuthStateChanged,
-  signInWithEmailAndPassword,
-  signOut,
-} from 'firebase/auth';
-import { doc, onSnapshot, setDoc, serverTimestamp } from 'firebase/firestore';
-
+import {createUserWithEmailAndPassword,onAuthStateChanged,signInWithEmailAndPassword,signOut,} from 'firebase/auth';
+import { doc, onSnapshot, setDoc, serverTimestamp,getDoc } from 'firebase/firestore';
 import { useFirebaseContext } from './FirebaseProvider';
 
 export const AuthContext = createContext({});
 
-const PROFILE_COLLECTION = 'users'; // name of the FS collection of user profile docs
+const PROFILE_COLLECTION = 'users'; 
 
 const AuthProvider = (props) => {
   const children = props.children;
@@ -98,6 +91,33 @@ const AuthProvider = (props) => {
    * @param {string} displayName optional display name for the new account
    * @returns {boolean} true if the account is created, false otherwise
    */
+
+
+
+  const getUserRoleFromDatabase = async () => {
+    if (user?.uid) {
+        try {
+            const userDocRef = doc(myFS, PROFILE_COLLECTION, user.uid);
+            const userDocSnapshot = await getDoc(userDocRef);
+            if (userDocSnapshot.exists) {
+                const userData = userDocSnapshot.data();
+                return userData.userRole; 
+            } else {
+                console.error('User document does not exist');
+                return null;
+            }
+        } catch (error) {
+            console.error('Error fetching user role:', error);
+            return null;
+        }
+    } else {
+        console.error('No current user found');
+        return null;
+    }
+  };
+
+  
+
   const registerFunction = async (email, password, displayName = '') => {
     let userCredential;
     try {
@@ -189,6 +209,7 @@ const AuthProvider = (props) => {
     login: loginFunction,
     logout: logoutFunction,
     register: registerFunction,
+    userDBRole:getUserRoleFromDatabase,
   };
 
   return (
