@@ -5,7 +5,6 @@ import LoginForm from './LoginForm/LoginForm';
 import SignupForm from './SignupForm/SignupForm';
 import InfoIcon from '../InfoIcon/InfoIcon';
 
-
 const Login = () => {
   const { width,height} = Dimensions.get('window');
 
@@ -34,7 +33,7 @@ const Login = () => {
         </TouchableOpacity>
         {showLoginForm && (
           <View style={styles.loginFormContainer}>
-            <LoginForm />
+            <LoginForm/>
           </View>
         )}
         <View style={styles.hr} />
@@ -75,7 +74,7 @@ const styles = StyleSheet.create({
     width: 300,
     height: 200,
     resizeMode: 'cover',
-    marginBottom: 70,
+    marginBottom: 40,
   },
   paragraph: {
     fontSize: 16,
