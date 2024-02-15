@@ -1,28 +1,34 @@
 import React, {useState} from "react";
-import { View, StyleSheet,TextInput} from 'react-native';
+import { View, StyleSheet,TextInput,Button} from 'react-native';
+import { useAuthContext } from '../../Firebase/AuthProvider';
 
 const SignupForm=()=>{
 
-    const [text, setText] = useState('');
-    const onChangeText = newText => {
-        setText(newText);
+    const { register } = useAuthContext();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleRegister = () => {
+        register(email, password);
     };
 
     return(
         <View style={styles.container}>
-            <TextInput
-                style={styles.input}
-                onChangeText={onChangeText}
-                value={text}
-                placeholder="Email"
-            />
-            <TextInput
-                style={styles.input}
-                onChangeText={onChangeText}
-                value={text}
-                placeholder="Κωδικός"
-            />
-        </View>
+        <TextInput
+            style={styles.input}
+            onChangeText={setEmail}
+            value={email}
+            placeholder="Email"
+        />
+        <TextInput
+            style={styles.input}
+            onChangeText={setPassword}
+            value={password}
+            placeholder="Κωδικός"
+            secureTextEntry={true}
+        />
+        <Button title="Εγγραφή" onPress={handleRegister} style={{ width: "50%" }} />
+    </View>
 
     )
 }

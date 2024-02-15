@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from "react-native-vector-icons/FontAwesome6";
-// import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import {useDrawer} from '../Drawers/DrawerContext';
 import DrawerStud from '../Drawers/DrawerStud';
 
 const MainStud = () => {
-//   const navigation = useNavigation();
+  const navigation = useNavigation();
   const { toggleDrawer } = useDrawer();
 
   return (
