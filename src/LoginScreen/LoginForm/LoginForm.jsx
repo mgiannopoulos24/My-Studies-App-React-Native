@@ -1,13 +1,34 @@
 import React, { useState } from "react";
-import { View, StyleSheet, TextInput, Button } from 'react-native';
+import { View, StyleSheet, TextInput, Button, Text } from 'react-native'; // Import Text component
+import { useAuthContext } from '../../Firebase/AuthProvider'; 
+import { useNavigation } from '@react-navigation/native';
 
-
-const LoginForm = ({ navigation }) => {
+const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    
+    const { login, userDBRole } = useAuthContext();
+    const navigation=useNavigation();
 
-
+    const handleSignIn = async () => {
+        try {
+            // Call the login function with the email and password
+            const success = await login(email, password);
+            if (success) {
+                const userRole = await userDBRole(); // Fetch user role from the database
+                if (userRole === 'student') {
+                    navigation.navigate('MainStud'); // Redirect to MainStud for student users
+                } else if (userRole === 'professor') {
+                    navigation.navigate('MainProf'); // Redirect to MainProf for professor users
+                }
+            } else {
+                // Handle login failure
+                setErrorMessage('Login failed. Please check your credentials.'); // Set error message
+            }
+        } catch (error) {
+            console.error('Authentication failed:', error);
+            setErrorMessage('Authentication failed. Please try again later.'); // Set error message
+        }
+    };
 
     const onChangeText = (text, field) => {
         if (field === 'email') {
@@ -32,7 +53,7 @@ const LoginForm = ({ navigation }) => {
                 placeholder="Κωδικός"
                 secureTextEntry={true}
             />
-            <Button title="Σύνδεση" onClick={() => navigation.navigate('MainStud')}/>
+            <Button title="Σύνδεση" onPress={handleSignIn} />
         </View>
     );
 }
@@ -48,6 +69,10 @@ const styles = StyleSheet.create({
         padding: 10,
         backgroundColor: "white",
         borderRadius: 10,
+    },
+    error: {
+        color: 'red',
+        marginTop: 10,
     },
 });
 
