@@ -116,6 +116,27 @@ const AuthProvider = (props) => {
     }
   };
 
+  const getUserDisplayNameFromDatabase = async () => {
+    if (user?.uid) {
+      try {
+        const userDoc = await doc(myFS.collection(PROFILE_COLLECTION), user.uid).get();
+        if (userDoc.exists) {
+          const userData = userDoc.data();
+          return userData.displayName; 
+        } else {
+          console.error('User document does not exist');
+          return null;
+        }
+      } catch (error) {
+        console.error('Error fetching user displayName:', error);
+        return null;
+      }
+    } else {
+      console.error('No current user found');
+      return null;
+    }
+  };
+  
   
 
   const registerFunction = async (email, password, displayName = '') => {
@@ -210,6 +231,7 @@ const AuthProvider = (props) => {
     logout: logoutFunction,
     register: registerFunction,
     userDBRole:getUserRoleFromDatabase,
+    displayDBName: getUserDisplayNameFromDatabase
   };
 
   return (
