@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, TextInput, Button, Text } from 'react-native'; // Import Text component
+import { View, StyleSheet, TextInput, TouchableOpacity, Text } from 'react-native'; // Import Text component
 import { useAuthContext } from '../../Firebase/AuthProvider'; 
 import { useNavigation } from '@react-navigation/native';
 
@@ -53,7 +53,11 @@ const LoginForm = () => {
                 placeholder="Κωδικός"
                 secureTextEntry={true}
             />
-            <Button title="Σύνδεση" onPress={handleSignIn} />
+            <View style={styles.buttonContainer}>
+                <TouchableOpacity onPress={handleSignIn} style={styles.button}>
+                    <Text style={styles.buttonText}>Σύνδεση</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 }
@@ -73,6 +77,20 @@ const styles = StyleSheet.create({
     error: {
         color: 'red',
         marginTop: 10,
+    },
+    buttonContainer: {
+        alignItems: 'center', // Center the button horizontally
+        marginTop: 10,
+    },
+    button: {
+        backgroundColor: 'blue',
+        padding: 10,
+        borderRadius: 5,
+        width: '30%', // Set the button width to 50%
+    },
+    buttonText: {
+        color: 'white',
+        textAlign: 'center', // Center the text inside the button
     },
 });
 
