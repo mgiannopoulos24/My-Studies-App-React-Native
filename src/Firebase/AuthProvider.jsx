@@ -116,26 +116,23 @@ const AuthProvider = (props) => {
     }
   };
 
-  const getUserDisplayNameFromDatabase = async () => {
-    if (user?.uid) {
-      try {
-        const userDoc = await doc(myFS.collection(PROFILE_COLLECTION), user.uid).get();
-        if (userDoc.exists) {
-          const userData = userDoc.data();
-          return userData.displayName; 
-        } else {
-          console.error('User document does not exist');
-          return null;
-        }
-      } catch (error) {
-        console.error('Error fetching user displayName:', error);
-        return null;
+  // Example implementation inside AuthProvider
+  useEffect(() => {
+  if (user) {
+    const fetchDisplayName = async () => {
+      const userDocRef = doc(myFS, 'users', user.uid);
+      const userDocSnap = await getDoc(userDocRef);
+      if (userDocSnap.exists()) {
+        const userData = userDocSnap.data();
+        setProfile({ ...profile, displayName: userData.displayName }); // Assuming profile is an object holding user data
+      } else {
+        console.log("No such document!");
       }
-    } else {
-      console.error('No current user found');
-      return null;
-    }
-  };
+    };
+    fetchDisplayName();
+  }
+  }, [user, myFS]);
+
   
   
 
@@ -231,7 +228,7 @@ const AuthProvider = (props) => {
     logout: logoutFunction,
     register: registerFunction,
     userDBRole:getUserRoleFromDatabase,
-    displayDBName: getUserDisplayNameFromDatabase
+    
   };
 
   return (
