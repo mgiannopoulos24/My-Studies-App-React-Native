@@ -36,6 +36,7 @@ const Login = () => {
             <LoginForm/>
           </View>
         )}
+        <br></br>
         <View style={styles.hr} />
         <Text style={styles.paragraph}>Αν δεν έχετε ιδρυματικό λογαριασμό:</Text>
         <TouchableOpacity style={{ ...styles.button, ...styles.outlinedButton }} onPress={handleAccountCreation}>
@@ -72,7 +73,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: 300,
-    height: 200,
+    height: 150,
     resizeMode: 'cover',
     marginBottom: 40,
   },
