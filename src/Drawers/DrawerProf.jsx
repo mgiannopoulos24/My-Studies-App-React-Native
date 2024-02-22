@@ -13,8 +13,8 @@ const DrawerProf = () => {
   const translateX = useRef(new Animated.Value(-drawerWidth)).current;
   const navigation = useNavigation();
 
-  const { displayDBName } = useAuthContext();
-  const name={displayDBName};
+  const { profile } = useAuthContext();
+
   const openDrawer = () => {
     Animated.timing(translateX, {
       toValue: 0,
@@ -126,7 +126,7 @@ const DrawerProf = () => {
         )}
         <TouchableOpacity style={styles.drawerButton} onPress={() => setShowDropdown4(!showDropdown4)}>
           <View style={styles.buttonContainer}>
-            <Text style={{fontSize:16, fontWeight:"bold"}}>{displayDBName}</Text>
+            <Text style={{fontSize:16, fontWeight:"bold"}}>{profile?.displayName}</Text>
             <Icon name={showDropdown1 ? "caret-up" : "caret-down"} size={20} color="#333" />
           </View>
         </TouchableOpacity>
