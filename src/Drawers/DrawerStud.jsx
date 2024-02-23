@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Animated, Switch , Dimensions, TouchableOpacity
 import { useDrawer } from './DrawerContext';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { useAuthContext } from '../Firebase/AuthProvider'; 
 
 const DrawerStud = () => {
   const { isDrawerOpen, toggleDrawer } = useDrawer();
@@ -69,14 +70,14 @@ const DrawerStud = () => {
           <Icon name="close" size={20} color="#333" />
         </TouchableOpacity>
         <TouchableOpacity style={styles.drawerButton} onPress={handleNavigationToMainStud}>
-          <View style={styles.buttonContainer}>
+          <View style={[styles.buttonContainer, { justifyContent: 'space-between' }]}>
             <Icon name="home" size={20} color="#333" />
-            <Text style={{fontSize:16, marginLeft: 10, fontWeight:"bold"}}>Αρχική Σελίδα</Text>
+            <Text style={{fontSize:16, fontWeight:"bold", width: '80%' }}>Αρχική Σελίδα</Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity style={styles.drawerButton} onPress={() => setShowDropdown1(!showDropdown1)}>
-          <View style={styles.buttonContainer}>
-            <Text style={{fontSize:16, fontWeight:"bold"}}>Δηλώσεις</Text>
+          <View style={[styles.buttonContainer, { justifyContent: 'space-between' }]}> 
+            <Text style={{ fontSize: 16, fontWeight: "bold", width: '80%' }}>Δηλώσεις</Text> 
             <Icon name={showDropdown1 ? "caret-up" : "caret-down"} size={20} color="#333" />
           </View>
         </TouchableOpacity>
@@ -155,6 +156,22 @@ const DrawerStud = () => {
             value={isEnabled}
           />
         </View>
+        <br></br>
+        <View style={styles.contactContainer}>
+          <Icon name="send-o" size={20} color="#333" styles={styles.iconMail}/>
+          <Text style={styles.contactText}>Επικοινωνία</Text>
+        </View>
+        <br></br>
+        <View style={styles.signoutContainer}>
+          <Icon name="sign-out" size={20} color="red" styles={styles.iconSignout}/>
+          <Text style={styles.signoutText}>Αποσύνδεση</Text>
+        </View>
+        <br></br>
+        <View style={styles.infoContainer}>
+          <Icon name="info-circle" size={20} color="#333" styles={styles.iconInfo}/>
+          <Text style={styles.infoText}>Σχετικά με την εφαρμογή</Text>
+        </View>
+        <br></br>
       </View>
     </Animated.View>
   );
@@ -219,6 +236,43 @@ const styles = StyleSheet.create({
   darkThemeText: {
     fontSize: 16,
     marginRight: 10,
+  },
+  contactContainer:{
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent:"space-around"
+  },
+  iconMail:{
+    marginRight: 10,
+  },
+  contactText:{
+    fontSize: 16,
+    marginRight: 10,
+  },
+  iconSignout:{
+    width:"10%",
+  },
+  iconInfo:{
+    marginRight: 10,
+  },
+  infoContainer:{
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent:"flex-start"
+  },
+  signoutContainer:{
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent:"space-around"
+  },
+  infoText:{
+    fontSize: 16,
+    marginRight: 10,
+  },
+  signoutText:{
+    fontSize: 16,
+    marginRight: 10,
+    color:"red",
   },
 });
 
