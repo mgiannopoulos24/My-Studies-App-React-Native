@@ -10,9 +10,6 @@ config.resolver.alias = {
   '@': path.resolve(__dirname, 'src'),
 };
 
-// Add yaml file extensions
-config.resolver.sourceExts = [...config.resolver.sourceExts, 'yaml', 'yml'];
-
 module.exports = withNativeWind(
   withTamagui(config, {
     components: ['tamagui'],
