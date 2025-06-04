@@ -1,13 +1,12 @@
-import { View, Text } from 'tamagui';
+import { Text } from 'tamagui';
 import { Button } from 'tamagui';
 import { Input } from 'tamagui';
-import { Form, XStack, YStack, Spinner, Label } from 'tamagui';
-import { auth } from '@/services/Firebase/firebase';
-import { db } from '@/services/Firebase/firebase';
+import { XStack, YStack, Spinner, Label, Anchor } from 'tamagui'; 
+import { auth, db } from '@/services/Firebase/firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'; 
 import { useTranslation } from 'react-i18next';
 
 interface LoginFormProps {
@@ -22,8 +21,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
   const [emailError, setEmailError] = useState<string | null>(null);
   const { t, i18n } = useTranslation();
 
-  // Set initial language from AsyncStorage
-  React.useEffect(() => {
+  useEffect(() => {
     const loadSavedLanguage = async () => {
       try {
         const savedLanguage = await AsyncStorage.getItem('language');
@@ -43,10 +41,17 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
     return emailPattern.test(email);
   };
 
+  const handleEmailChange = (text: string) => {
+    setEmail(text);
+    if (emailError) {
+      setEmailError(null);
+    }
+  };
+
   const handleLogin = async () => {
     setIsLoading(true);
     setErrorMessage(null);
-    setEmailError(null);
+    // setEmailError(null); // Email error is now cleared on input change
 
     if (!validateEmail(email)) {
       setEmailError(t('uoaEmail'));
@@ -66,7 +71,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
         const userData = querySnapshot.docs[0].data();
         const userRole = userData.role;
 
-        // Save user data to AsyncStorage
         await AsyncStorage.setItem('userRole', userRole);
         await AsyncStorage.setItem('userEmail', user.email || '');
         await AsyncStorage.setItem('userId', user.uid);
@@ -112,22 +116,23 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
             id="email"
             placeholder="you@di.uoa.gr"
             value={email}
-            onChangeText={setEmail}
+            onChangeText={handleEmailChange} 
             editable={!isLoading}
             keyboardType="email-address"
             autoCapitalize="none"
-            borderColor={emailError ? "$red10" : undefined}
+            borderColor={emailError ? "$red10" : "$borderColor"}
           />
           {emailError && (
-            <Text color="$red10" fontSize="$2">
+            <Text color="$red10" fontSize="$2"> 
               {emailError}
             </Text>
           )}
         </YStack>
         
-        <YStack space="$1.5" width="100%">
-          <Label>{t('password')}</Label>
+        <YStack space="$1.5" width="100%"> 
+          <Label htmlFor="password">{t('password')}</Label>
           <Input
+            id="password"
             placeholder="••••••••"
             value={password}
             onChangeText={setPassword}
@@ -135,12 +140,26 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
             editable={!isLoading}
           />
         </YStack>
+
+        <XStack justifyContent="flex-end" width="100%"> 
+          <Anchor
+            href="http://www.noc.uoa.gr/diaxeirish-logariasmoy.html" 
+            target="_blank"
+            rel="noopener noreferrer" 
+            fontSize="$1" 
+            color="$color" 
+            hoverStyle={{ textDecorationLine: 'underline' }}
+          
+          >
+            {t('forgotPassword')}
+          </Anchor>
+        </XStack>
         
         <Button 
           onPress={handleLogin} 
           disabled={isLoading} 
           width="100%"
-          themeInverse
+          themeInverse 
         >
           {isLoading ? (
             <XStack space="$2" alignItems="center">
@@ -154,8 +173,14 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
       </YStack>
       
       {errorMessage && (
-        <YStack marginTop="$4" width="100%" maxWidth={400} paddingHorizontal="$4" alignItems="center">
-          <Text color="$red10" textAlign="center">
+        <YStack 
+          marginTop="$4" 
+          width="100%" 
+          maxWidth={400} 
+          paddingHorizontal="$4" // Corresponds to px-4
+          alignItems="center"
+        >
+          <Text color="$red10" textAlign="center"> 
             {errorMessage}
           </Text>
         </YStack>
