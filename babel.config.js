@@ -17,7 +17,7 @@ module.exports = function (api) {
       ["module-resolver", {
         root: ["./"],
         alias: {
-          "@": "./",
+          "@": "./src", // Changed from "./" to "./src"
           "tailwind.config": "./tailwind.config.ts"
         }
       }]

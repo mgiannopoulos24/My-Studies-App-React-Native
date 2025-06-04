@@ -25596,7 +25596,7 @@ var GorhomPortalItem = /* @__PURE__ */ __name((props) => {
   return cur && node !== cur && setNode(cur), (0, import_react15.useEffect)(() => {
     if (!props.hostName || node) return;
     const listener = /* @__PURE__ */ __name((newNode) => {
-      node && setNode(newNode);
+      setNode(newNode);
     }, "listener");
     return portalListeners[props.hostName] ||= /* @__PURE__ */ new Set(), portalListeners[props.hostName].add(listener), () => {
       portalListeners[props.hostName]?.delete(listener);

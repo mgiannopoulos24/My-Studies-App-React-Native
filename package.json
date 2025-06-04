@@ -20,6 +20,7 @@
     "@tamagui/config": "^1.126.13",
     "@tamagui/core": "^1.126.13",
     "@tamagui/font-inter": "^1.126.13",
+    "@tamagui/lucide-icons": "^1.126.14",
     "@tamagui/metro-plugin": "^1.126.13",
     "@tamagui/theme-base": "^1.126.13",
     "expo": "~53.0.9",
