@@ -1,12 +1,12 @@
 import { Text } from 'tamagui';
 import { Button } from 'tamagui';
 import { Input } from 'tamagui';
-import { XStack, YStack, Spinner, Label, Anchor } from 'tamagui'; 
+import { XStack, YStack, Spinner, Label, Anchor } from 'tamagui';
 import { auth, db } from '@/services/Firebase/firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, { useState, useEffect } from 'react'; 
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface LoginFormProps {
@@ -32,7 +32,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
         console.error('Failed to load saved language:', error);
       }
     };
-    
+
     loadSavedLanguage();
   }, [i18n]);
 
@@ -76,7 +76,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
         await AsyncStorage.setItem('userId', user.uid);
 
         console.log(`User role: ${userRole}`);
-        
+
         onLoginSuccess();
       } else {
         setErrorMessage('User account exists but no role assigned. Contact administrator.');
@@ -103,33 +103,27 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
 
   return (
     <YStack alignItems="center" width="100%">
-      <YStack 
-        space="$4" 
-        marginTop="$4" 
-        width="100%" 
-        maxWidth={400} 
-        paddingHorizontal="$4"
-      >
+      <YStack space="$4" marginTop="$4" width="100%" maxWidth={400} paddingHorizontal="$4">
         <YStack space="$1.5" width="100%">
           <Label htmlFor="email">Email</Label>
           <Input
             id="email"
             placeholder="you@di.uoa.gr"
             value={email}
-            onChangeText={handleEmailChange} 
+            onChangeText={handleEmailChange}
             editable={!isLoading}
             keyboardType="email-address"
             autoCapitalize="none"
-            borderColor={emailError ? "$red10" : "$borderColor"}
+            borderColor={emailError ? '$red10' : '$borderColor'}
           />
           {emailError && (
-            <Text color="$red10" fontSize="$2"> 
+            <Text color="$red10" fontSize="$2">
               {emailError}
             </Text>
           )}
         </YStack>
-        
-        <YStack space="$1.5" width="100%"> 
+
+        <YStack space="$1.5" width="100%">
           <Label htmlFor="password">{t('password')}</Label>
           <Input
             id="password"
@@ -141,26 +135,20 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
           />
         </YStack>
 
-        <XStack justifyContent="flex-end" width="100%"> 
+        <XStack justifyContent="flex-end" width="100%">
           <Anchor
-            href="http://www.noc.uoa.gr/diaxeirish-logariasmoy.html" 
+            href="http://www.noc.uoa.gr/diaxeirish-logariasmoy.html"
             target="_blank"
-            rel="noopener noreferrer" 
-            fontSize="$1" 
-            color="$color" 
+            rel="noopener noreferrer"
+            fontSize="$1"
+            color="$color"
             hoverStyle={{ textDecorationLine: 'underline' }}
-          
           >
             {t('forgotPassword')}
           </Anchor>
         </XStack>
-        
-        <Button 
-          onPress={handleLogin} 
-          disabled={isLoading} 
-          width="100%"
-          themeInverse 
-        >
+
+        <Button onPress={handleLogin} disabled={isLoading} width="100%" themeInverse>
           {isLoading ? (
             <XStack space="$2" alignItems="center">
               <Spinner size="small" color="$color" />
@@ -171,16 +159,16 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
           )}
         </Button>
       </YStack>
-      
+
       {errorMessage && (
-        <YStack 
-          marginTop="$4" 
-          width="100%" 
-          maxWidth={400} 
+        <YStack
+          marginTop="$4"
+          width="100%"
+          maxWidth={400}
           paddingHorizontal="$4" // Corresponds to px-4
           alignItems="center"
         >
-          <Text color="$red10" textAlign="center"> 
+          <Text color="$red10" textAlign="center">
             {errorMessage}
           </Text>
         </YStack>

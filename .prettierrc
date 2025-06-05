@@ -8,8 +8,6 @@
     "bracketSameLine": false,
     "arrowParens": "always",
     "printWidth": 100,
-    "endOfLine": "lf",
-    "importOrderSeparation": true,
-    "importOrderSortSpecifiers": true
+    "endOfLine": "lf"
 }
   

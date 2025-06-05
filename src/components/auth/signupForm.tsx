@@ -30,7 +30,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSignupSuccess }) => {
         console.error('Failed to load saved language:', error);
       }
     };
-    
+
     loadSavedLanguage();
   }, [i18n]);
 
@@ -105,12 +105,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSignupSuccess }) => {
   return (
     <YStack width="100%">
       {showSignupForm && (
-        <YStack 
-          space="$4" 
-          width="100%" 
-          maxWidth={400} 
-          paddingHorizontal="$4"
-        >
+        <YStack space="$4" width="100%" maxWidth={400} paddingHorizontal="$4">
           <YStack space="$1.5" width="100%">
             <Label htmlFor="email">Email</Label>
             <Input
@@ -121,7 +116,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSignupSuccess }) => {
               editable={!isLoading}
               keyboardType="email-address"
               autoCapitalize="none"
-              borderColor={emailError ? "$red10" : undefined}
+              borderColor={emailError ? '$red10' : undefined}
             />
             {emailError && (
               <Text color="$red10" fontSize="$2">
@@ -156,12 +151,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSignupSuccess }) => {
             </YStack>
           )}
 
-          <Button 
-            onPress={handleSignUp} 
-            disabled={isLoading} 
-            width="100%"
-            themeInverse
-          >
+          <Button onPress={handleSignUp} disabled={isLoading} width="100%" themeInverse>
             {isLoading ? (
               <XStack space="$2" alignItems="center">
                 <Spinner size="small" color="$color" />
@@ -175,11 +165,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSignupSuccess }) => {
       )}
 
       {showSignupNotification && (
-        <YStack 
-          width="100%" 
-          maxWidth={400} 
-          paddingHorizontal="$4"
-        >
+        <YStack width="100%" maxWidth={400} paddingHorizontal="$4">
           <YStack
             marginTop="$4"
             backgroundColor="$green2"
