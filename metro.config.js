@@ -5,6 +5,9 @@ const path = require('path');
 
 const config = getDefaultConfig(__dirname)
 
+// Add YAML support
+config.resolver.assetExts.push('yaml', 'yml');
+
 // Add alias resolver
 config.resolver.alias = {
   '@': path.resolve(__dirname, 'src'),
